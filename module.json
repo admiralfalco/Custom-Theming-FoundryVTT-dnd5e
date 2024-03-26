@@ -1,7 +1,7 @@
 {
   "id": "custom-themes",
   "title": "Custom Themes",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
@@ -20,14 +20,24 @@
     "requires": [
       {
         "id": "colorsettings",
-        "type": "module"
+        "type": "module",
+        "compatibility": {}
       }
     ],
     "systems": [
       {
         "id": "dnd5e",
-        "type": "system"
+        "type": "system",
+        "compatibility": {}
       }
     ]
-  }
+  },
+  "authors": [
+    {
+      "name": "Admiral Falco",
+      "discord": "admiral_falco",
+      "url": "https://github.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e"
+    }
+  ],
+  "url": "https://github.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e"
 }
