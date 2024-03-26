@@ -1,0 +1,190 @@
+:root {
+  --background-color: #2A2D35;
+}
+
+/* ----------------------------------------- */
+/*  Root                                     */
+/* ----------------------------------------- */
+:root {
+--color-text-light-highlight: var(--tertiary-color); 
+--color-text-light-heading: var(--Primary-color); 
+--color-text-light-primary: var(--secondary-color); 
+--color-text-dark-primary: #E0EFE6; 
+--color-text-dark-secondary: var(--secondary-color); 
+--color-text-dark-header: #333842; 
+--color-text-dark-inactive: #50565F; 
+--color-text-hyperlink: var(--Primary-color);
+--color-text-light-0: #ffffff; 
+--color-text-light-1: #e6e6e6; 
+--color-text-light-2: #cccccc; 
+--color-text-light-3: #b3b3b3; 
+--color-text-light-4: #999999; 
+--color-text-light-5: #808080; 
+--color-text-light-6: #666666; 
+--color-text-light-7: #4d4d4d; 
+--color-text-dark-0: #4d4d4d;  
+--color-text-dark-1: #666666; 
+--color-text-dark-2: #808080; 
+--color-text-dark-3: #999999; 
+--color-text-dark-4: #b3b3b3; 
+--color-text-dark-5: #cccccc; 
+--color-text-dark-6: #e6e6e6; 
+--color-text-dark-7: #ffffff; 
+--color-border-light-1: #cccccc; 
+--color-border-light-2: #999999; 
+--color-border-dark-1: #1a1a1a; 
+--color-border-dark-2: #333333; 
+--color-border-dark-3: #4d4d4d; 
+--color-border-dark-4: #666666; 
+--color-border-dark-5: #808080; 
+--color-shadow-primary: var(--Primary-color); 
+--color-shadow-highlight: var(--secondary-color); 
+--color-shadow-dark: #000000; 
+--color-underline-inactive: #50565F; 
+--color-underline-active: var(--Primary-color); 
+--color-underline-header: var(--secondary-color); 
+--color-border-light-highlight: var(--Primary-color); 
+--color-border-light-primary: var(--tertiary-color); 
+--color-border-light-secondary: var(--secondary-color); 
+--color-border-light-tertiary: #50565F; 
+--color-border-dark: #282C34; 
+--color-border-dark-primary: #282C34; 
+--color-border-dark-secondary: #333842; 
+--color-border-dark-tertiary: #3C4049; 
+--color-border-highlight: var(--secondary-color); 
+--color-border-highlight-alt: var(--Primary-color); 
+--color-bg-btn-minor-inactive: var(--tertiary-color); 
+--color-bg-btn-minor-active: var(--secondary-color); 
+--color-bg-option: #333842; 
+--color-checkbox-checked: #666;
+--color-ownership-none: #5500ff;
+--color-ownership-observer: #7a7971;
+--color-ownership-owner: #b5b3a4;
+--color-level-info: #5c87b9;
+--color-level-warning: #b18404;
+--color-level-error: #750003;
+--color-level-success: #266c3c;
+}
+
+
+
+/* ----------------------------------------- */
+/*  Stylesheets                              */
+/* ----------------------------------------- */
+
+/* Dnd5e */
+:root {
+--dnd5e-color-black: #000000; /* Black adjusted for consistency */
+--dnd5e-color-dark: var(--background-color); /* Dark grey for primary dark elements */
+--dnd5e-color-faint: #A2C3AC; /* Soft green for faint accents */
+--dnd5e-color-beige:#E0EFE6; /* Light green for a beige-like appearance */
+--dnd5e-color-tan: #50565F; /* Grey for a tan-like appearance */
+--dnd5e-color-olive: #3C4049; /* Dark grey for an olive-like appearance */
+--dnd5e-color-crimson: #44191A; /* Crimson, kept for specific uses */
+--dnd5e-color-groove: #333842; /* Dark grey for groove color */
+--dnd5e-color-gold: #a5a5a5; /* Muted gold for dark mode compatibility */
+--dnd5e-color-red: #ed1c24; /* Red, kept for alerts and warnings */
+--dnd5e-color-blue: #417595; /* Adjusted blue for better visibility */
+--dnd5e-color-green: #4CA977; /* Success green */
+--dnd5e-color-maroon: #741b2b; /* Maroon, kept for specific elements */
+--dnd5e-color-parchment: #2A2D35; /* Dark background for parchment-like elements */
+--dnd5e-color-scrollbar: var(--Primary-color); /* Scrollbar color to match hyperlink */
+--dnd5e-color-card: #313639; /* Dark cards for backgrounds */
+--dnd5e-color-hp-1: var(--Primary-color); /* Dark green for health gradient start */
+--dnd5e-color-hp-2: var(--secondary-color); /* Bright green for health gradient end */
+--dnd5e-color-hp-3: var(--tertiary-color); /* Mid green for health status */
+--dnd5e-color-hd-1: var(--Primary-color); /* Dark green for health gradient start */
+--dnd5e-color-hd-2: var(--tertiary-color); /* Bright green for health gradient end */
+--dnd5e-color-hd-3: var(--secondary-color); /* Mid green for health status */
+--dnd5e-color-sc-1: #433754; /* Dark purple for spell capacity start */
+--dnd5e-color-sc-2: #776493; /* Light purple for spell capacity end */
+--dnd5e-color-iron-gray: #313131; /* Dark grey for iron-like surfaces */
+--dnd5e-color-light-gray: #3d3d3d; /* Slightly lighter grey for contrast */
+--dnd5e-color-success: #4CA977; /* Success color, bright green */
+--dnd5e-color-success-background: #c7d0c0; /* Light background for success messages */
+--dnd5e-color-success-critical: #3FA796; /* Vibrant green for critical success */
+--dnd5e-color-failure: #6e0000; /* Dark red for failure */
+--dnd5e-color-failure-background: #ffdddd; /* Light red background for failure messages */
+--dnd5e-color-failure-critical: #FF6B6B; /* Bright red for critical failure */
+--dnd5e-background-10: rgba(0, 0, 0, 0.1); /* Dark overlay for backgrounds */
+--dnd5e-background-5: rgba(0, 0, 0, 0.05); /* Lighter dark overlay for subtle backgrounds */
+--dnd5e-border-dark: 1px solid #999; /* Dark border for elements */
+--dnd5e-border-light: 1px solid #CCC; /* Lighter border for contrast */
+--dnd5e-border-groove: 2px groove var(--dnd5e-color-groove); /* Groove border for interactive elements */
+--dnd5e-border-dotted: 1px dotted #bbb; /* Dotted border for decorative purposes */
+--dnd5e-sheet-background: url("ui/parchment.jpg") repeat; /* Background for sheets, dark theme compatible */
+--dnd5e-shadow-45: rgba(0, 0, 0, 0.45);
+--dnd5e-shadow-15: rgba(0, 0, 0, 0.15);
+--dnd5e-highlight-45: rgba(40, 44, 52, 0.45); /* Darker highlight for overlays */
+}
+
+
+/* ----------------------------------------- */
+/*  Tweaks                                   */
+/* ----------------------------------------- */
+
+:is(.chat-popout, #chat-log) .message::before { 
+  background-color: var(--dnd5e-color-dark);
+}
+
+
+.ve-window, .fltr__mini-view, label, .window-app .window-content {
+  background-color: var(--dnd5e-color-dark) !important;
+  background-blend-mode: darken !important;
+}
+
+.dnd5e2 .pill-lg.empty {
+    color: var(--color-text-dark-primary);
+}
+
+button, .fltr__pill{
+  color: var(--color-text-dark-primary);
+  background-color: var(--dnd5e-color-parchment) !important;
+}
+
+input, #chat-controls .roll-type-select {
+  background: var(--dnd5e-color-parchment) !important;
+}
+
+.dnd5e2 .pills .pill.pill-sm {
+color: var(--color-text-light-primary);
+border: 1px solid var(--dnd5e-color-gold);
+}
+
+h1, h2, h3, .dnd5e input[type="text"], .dnd5e input[type="number"], .dnd5e select{
+color: var(--color-text-light-heading) !important;
+}
+
+.dnd5e2.sheet.actor.character .sheet-body .skills .ability, .dnd5e2.sheet.actor.character .sheet-body .tools .ability, .dnd5e2.sheet.actor.character .sheet-body .saves .ability {
+color: var(--color-text-light-primary);
+}
+
+.dnd5e2.sheet.actor.character .sheet-header > .left .class, .dnd5e.sheet.actor h4.box-title {
+color: var(---color-text-light-2);
+}
+
+.dnd5e.sheet .window-content, .dnd5e .form-group label {
+    color: var(--color-text-dark-primary);
+}
+
+#client-settings form .form-group > label  {
+    background-color: none !important;
+    }
+
+.dnd5e.sheet.actor.npc .summary li span, .dnd5e.sheet.actor .counters .counter h4, .dnd5e.sheet.actor .ability-scores .ability input.ability-score {
+    color: var(--color-text-light-highlight);
+}
+
+.dnd5e.sheet.actor.npc .header-exp .experience, .dnd5e.sheet.actor.npc .header-exp .proficiency {
+    color: var(--color-text-light-3);
+}
+/* ----------------------------------------- */
+/*  Custom Features                          */
+/* ----------------------------------------- */
+
+
+
+.dnd5e2.sheet.actor.character .sheet-header::before {
+    background-image: 
+    linear-gradient(to left, color-mix(in srgb, var(--color-text-light-primary), transparent 80%),  color-mix(in srgb, var(--color-text-light-primary), transparent 80%));
+  }

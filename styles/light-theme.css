@@ -1,0 +1,175 @@
+:root {
+  --background-color: #f1ebe8;
+}
+
+/* ----------------------------------------- */
+/*  Root                                     */
+/* ----------------------------------------- */
+:root {
+  --color-text-light-highlight: var(--tertiary-color);
+  --color-text-light-heading: var(--Primary-color);
+  --color-text-light-primary: var(--secondary-color);
+  --color-text-dark-primary:  #191813;
+  --color-text-dark-secondary: var(--secondary-color);
+  --color-text-dark-header: #23221d;
+  --color-text-dark-inactive: #7a7971;
+  --color-text-hyperlink: var(--Primary-color);
+  --color-text-light-0: #fff;
+  --color-text-light-1: #eee;
+  --color-text-light-2: #ddd;
+  --color-text-light-3: #ccc;
+  --color-text-light-4: #bbb;
+  --color-text-light-5: #aaa;
+  --color-text-light-6: #999;
+  --color-text-light-7: #888;
+  --color-text-dark-0: #000;
+  --color-text-dark-1: #111;
+  --color-text-dark-2: #222;
+  --color-text-dark-3: #444;
+  --color-text-dark-4: #555;
+  --color-text-dark-5: #666;
+  --color-text-dark-6: #777;
+  --color-text-dark-7: #999;
+  --color-border-light-1: #ddd;
+  --color-border-light-2: #999;
+  --color-border-dark-1: #111;
+  --color-border-dark-2: #222;
+  --color-border-dark-3: #333;
+  --color-border-dark-4: #444;
+  --color-border-dark-5: #666;
+  --color-shadow-primary: var(--Primary-color);
+  --color-shadow-highlight: var(--secondary-color);
+  --color-shadow-dark: #000;
+  --color-underline-inactive: #7a7971;
+  --color-underline-active: var(--Primary-color);
+  --color-underline-header: var(--secondary-color);
+  --color-border-light-highlight: var(--tertiary-color);
+  --color-border-light-primary: var(--secondary-color);
+  --color-border-light-tertiary: var(--Primary-color);
+  --color-border-dark: #000;
+  --color-border-dark-primary:  #191813;
+  --color-border-dark-primary: #23221d;
+  --color-border-dark-tertiary: #4b4a44;
+  --color-border-highlight: var(--secondary-color);
+  --color-border-highlight-alt: var(--Primary-color);
+  --color-bg-btn-minor-inactive: var(--tertiary-color);
+  --color-bg-btn-minor-active: var(--secondary-color);
+  --color-bg-option: #dad8cc;
+  --color-checkbox-checked: #666;
+  --color-ownership-none: #5500ff;
+  --color-ownership-observer: #7a7971;
+  --color-ownership-owner: #b5b3a4;
+  --color-level-info: #5c87b9;
+  --color-level-warning: #b18404;
+  --color-level-error: #750003;
+  --color-level-success: #266c3c;
+}
+
+
+/* ----------------------------------------- */
+/*  Stylesheets                              */
+/* ----------------------------------------- */
+
+/* Dnd5e */
+:root {
+  --dnd5e-color-black: #000;
+  --dnd5e-color-dark: #191813;
+  --dnd5e-color-faint: #c9c7b8;
+  --dnd5e-color-beige: #b5b3a4;
+  --dnd5e-color-tan: #7a7971;
+  --dnd5e-color-olive: #4b4a44;
+  --dnd5e-color-crimson: #44191A;
+  --dnd5e-color-groove: var(--background-color);
+  --dnd5e-color-gold: #9f9275;
+  --dnd5e-color-red: #ed1c24;
+  --dnd5e-color-blue: cornflowerblue;
+  --dnd5e-color-green: #205b15;
+  --dnd5e-color-maroon: #741b2b;
+  --dnd5e-color-parchment: #f1ebe8;
+  --dnd5e-color-scrollbar: var(--Primary-color);
+  --dnd5e-color-card: #f8f4f1;
+  --dnd5e-color-hp-1: var(--Primary-color); 
+  --dnd5e-color-hp-2: var(--secondary-color); 
+  --dnd5e-color-hp-3: var(--tertiary-color); 
+  --dnd5e-color-hd-1: var(--Primary-color); 
+  --dnd5e-color-hd-2: var(--tertiary-color); 
+  --dnd5e-color-hd-3: var(--secondary-color); 
+  --dnd5e-color-sc-1: #433754;
+  --dnd5e-color-sc-2: #776493;
+  --dnd5e-color-iron-gray: #313131;
+  --dnd5e-color-light-gray: #3d3d3d;
+  --dnd5e-color-success: #006c00;
+  --dnd5e-color-success-background: #c7d0c0;
+  --dnd5e-color-success-critical: green;
+  --dnd5e-color-failure: #6e0000;
+  --dnd5e-color-failure-background: #ffdddd;
+  --dnd5e-color-failure-critical: red;
+  --dnd5e-background-10: rgba(0, 0, 0, 0.1);
+  --dnd5e-background-5: rgba(0, 0, 0, 0.05);
+  --dnd5e-border-dark: 1px solid #999;
+  --dnd5e-border-light: 1px solid #CCC;
+  --dnd5e-border-groove: 2px groove var(--dnd5e-color-groove);
+  --dnd5e-border-dotted: 1px dotted #bbb;
+  --dnd5e-font-modesto: "Modesto Condensed", "Palatino Linotype", serif;
+  --dnd5e-font-roboto: Roboto, sans-serif;
+  --dnd5e-font-roboto-condensed: "Roboto Condensed", sans-serif;
+  --dnd5e-font-roboto-slab: "Roboto Slab", serif;
+  --dnd5e-sheet-background: url("ui/parchment.jpg") repeat;
+  --dnd5e-shadow-45: rgba(0, 0, 0, 0.45);
+  --dnd5e-shadow-15: rgba(0, 0, 0, 0.15);
+  --dnd5e-highlight-45: rgba(255, 255, 255, 0.45);
+}
+
+
+/* ----------------------------------------- */
+/*  Tweaks                                   */
+/* ----------------------------------------- */
+
+:is(.chat-popout, #chat-log) .message::before { 
+    background-color: var(--dnd5e-color-parchment);
+  }
+  
+  
+  .ve-window, .fltr__mini-view, label, .window-app .window-content {
+    background-color: var(--dnd5e-color-groove) !important;
+    background-blend-mode: lighten !important;
+  }
+  
+  button, .fltr__pill{
+    color: var(--color-text-dark-primary);
+    background-color: var(--dnd5e-color-parchment) !important;
+  }
+  
+  input, #chat-controls .roll-type-select {
+    background: var(--dnd5e-color-parchment) !important;
+  }
+  
+  .dnd5e2 .pills .pill.pill-sm {
+  color: var(--color-text-light-primary);
+  border: 1px solid var(--dnd5e-color-gold);
+  }
+  
+  h1, h2, h3 {
+  color: var(--color-text-light-heading) !important;
+  }
+
+  .dnd5e2.sheet.actor.character .sheet-body .skills .ability, .dnd5e2.sheet.actor.character .sheet-body .tools .ability, .dnd5e2.sheet.actor.character .sheet-body .saves .ability {
+  color: var(--color-text-light-primary);
+  }
+
+  .dnd5e2.sheet.actor.character .sheet-header > .left .class {
+    color: var(---color-text-light-1);
+  }
+
+    #client-settings form .form-group > label  {
+    background-color: transparent !important;
+    }
+/* ----------------------------------------- */
+/*  Custom Features                          */
+/* ----------------------------------------- */
+
+  
+.dnd5e2.sheet.actor.character .sheet-header::before {
+    background-image: 
+    linear-gradient(to left, color-mix(in srgb, var(--color-text-light-primary), transparent 80%),  color-mix(in srgb, var(--color-text-light-primary), transparent 80%));
+  }

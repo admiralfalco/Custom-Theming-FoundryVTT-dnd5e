@@ -1,0 +1,73 @@
+:root {
+  --Primary-color: #FFF;
+  --secondary-color: #666;
+  --tertiary-color: #333;
+  --background-color: #000;
+}
+
+/* Custom Features */
+
+@keyframes HueZoomDynamic {
+  0% {
+
+    background-size: 100%;
+    background-position: 50% 50%;
+  }
+  25% {
+    background-size: 110%;
+    background-position: 0% 50%; /* zoom in origin locked to the top left */
+  }
+  50% {
+    background-size: 110%;
+    background-position: 100% 50%; /* Slide to Right */
+  }
+  75% {
+    background-size: 100%;
+    background-position: 50% 50%; /* zoom out origin locked to the top right */
+  }  
+}
+
+
+.dnd5e2.sheet.actor.character .sheet-header > .right, .dnd5e2.sheet.actor.character .sheet-header > .left, .dnd5e2.sheet.actor.character > header  {
+  z-index: 2;
+}
+
+.dnd5e2.sheet.actor.character .ability-scores{
+  z-index: 1;
+}
+
+.dnd5e2.sheet.actor.character .sheet-header {
+  position: relative;
+  background-image:none;
+}
+
+.dnd5e2.sheet.actor.character .sheet-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('./ui/banner-character.jpg') !important;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale();
+  z-index: 0;
+  animation: HueZoomDynamic 10s infinite;
+}
+
+.dnd5e2.sheet.actor.character .sheet-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1; /* Position it below the content but above the background image */
+  pointer-events: none; /* Allows click events to pass through */
+}
+
+.dnd5e2 button.unbutton {
+  background-color: transparent !important;
+}
+
