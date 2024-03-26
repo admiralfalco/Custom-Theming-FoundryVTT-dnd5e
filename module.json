@@ -39,5 +39,7 @@
       "url": "https://github.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e"
     }
   ],
-  "url": "https://github.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e"
+  "url": "https://github.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e",
+  "manifest": "https://raw.githubusercontent.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e/main/module.json",
+  "download": "https://github.com/admiralfalco/Custom-Theming-FoundryVTT-dnd5e/archive/refs/heads/main.zip",
 }
