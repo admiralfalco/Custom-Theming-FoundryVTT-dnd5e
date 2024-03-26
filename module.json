@@ -8,7 +8,7 @@
   },
   "description": "Custom Themes for foundry VTT and Modules",
   "scripts": [
-    "scripts/main.js"
+    "scripts/main.js", "scripts/locklight.js"
   ],
   "styles": [
     "styles/main.css"
