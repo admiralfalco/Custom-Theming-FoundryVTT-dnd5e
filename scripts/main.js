@@ -239,6 +239,31 @@ Hooks.once("init", function() {
         // Option 2: Apply a CSS class to the overlay for styling (if your CSS is designed this way)
         // overlay.className = `filter-${selectedFilter}`; // Make sure these classes are defined in your CSS
     }
+
+    game.settings.register("custom-themes", "customCSS", {
+        name: "Custom CSS",
+        hint: "Enter your custom CSS here. It will be applied on top of the current theme.",
+        scope: "client",
+        config: true,
+        type: String,
+        default: "",
+        onChange: value => applyCustomCSS(value) // Apply the CSS when it changes
+    });
+
+    function applyCustomCSS(css) {
+        let styleId = "user-custom-css";
+        let styleElement = document.getElementById(styleId);
+    
+        // If the style element doesn't exist, create it
+        if (!styleElement) {
+            styleElement = document.createElement("style");
+            styleElement.id = styleId;
+            document.head.appendChild(styleElement);
+        }
+    
+        // Set the custom CSS
+        styleElement.innerHTML = css;
+    }
     
 
     Hooks.once("ready", function() {
@@ -257,6 +282,9 @@ Hooks.once("init", function() {
         // Apply the selected filter
         const selectedFilter = game.settings.get("custom-themes", "filterSelection");
         loadFilter(selectedFilter);
+
+        const customCSS = game.settings.get("custom-themes", "customCSS");
+        applyCustomCSS(customCSS);
 
         const enableCustomBackground = game.settings.get("custom-themes", "enableCustomBackground");
         if (enableCustomBackground) {

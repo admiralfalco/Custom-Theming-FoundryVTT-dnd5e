@@ -94,8 +94,8 @@
 --dnd5e-color-hp-2: var(--secondary-color); /* Bright green for health gradient end */
 --dnd5e-color-hp-3: var(--tertiary-color); /* Mid green for health status */
 --dnd5e-color-hd-1: var(--Primary-color); /* Dark green for health gradient start */
---dnd5e-color-hd-2: var(--tertiary-color); /* Bright green for health gradient end */
---dnd5e-color-hd-3: var(--secondary-color); /* Mid green for health status */
+--dnd5e-color-hd-2: var(--secondary-color); /* Bright green for health gradient end */
+--dnd5e-color-hd-3: var(--tertiary-color); /* Mid green for health status */
 --dnd5e-color-sc-1: #433754; /* Dark purple for spell capacity start */
 --dnd5e-color-sc-2: #776493; /* Light purple for spell capacity end */
 --dnd5e-color-iron-gray: #313131; /* Dark grey for iron-like surfaces */
