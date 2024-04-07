@@ -1,0 +1,98 @@
+.simple-calendar.dark {
+    /* Font and Text */
+    --font-family: 'Roboto', sans-serif;
+    --heading-font-family: 'Roboto', sans-serif;
+    --input-color: var(--color-text-light-0); /* White */
+    --link-color: var(--Primary-color);
+    --link-hover-color: var(--color-border-highlight-alt);
+    --entity-link-icon-color: var(--Primary-color);
+    --entity-link-icon-hover-color: var(--color-border-highlight-alt);
+    --heading-border-color: var(--Primary-color);
+    --about-heading-border-color: var(--color-border-dark-tertiary);
+    --app-header-color: var(--color-text-light-0);
+    --app-color: var(--color-text-light-0);
+    --section-color: var(--color-text-light-0);
+    --side-drawer-color: var(--color-text-light-0);
+    --context-menu-color: var(--color-text-light-0);
+    --message-color: var(--color-text-light-0);
+    --note-cat-color: var(--color-text-light-0);
+    --note-list-note-hover-color: var(--color-text-light-highlight);
+    --cal-list-color: var(--color-text-light-0);
+    --config-menu-cal-selector-color: var(--color-text-light-0);
+    --config-menu-cal-selector-hover-color: var(--color-text-light-0);
+    --btn-grey-color: var(--color-text-light-0);
+    --btn-primary-color: var(--color-text-light-0);
+    --btn-delete-color: var(--color-text-light-0);
+    --btn-save-color: var(--color-text-light-0);
+    --form-group-input-color: var(--color-text-light-0);
+    --editor-color: var(--color-text-light-0);
+    --search-box-color: var(--color-text-light-0);
+    --time-selector-color: var(--color-text-light-0);
+    --toggle-border-color: var(--color-text-light-0);
+
+    /* Backgrounds and Borders */
+    --input-bg-color: var(--color-bg-option);
+    --app-header-bg-color: var(--background-color) !important;
+    --app-bg-color: var(--background-color) !important;
+    --section-bg-color: var(--background-color) !important;
+    --side-drawer-bg-color: var(--color-bg-option);
+    --context-menu-bg-color: rgba(var(--color-text-dark-0), 0.85); /* Adjust opacity as needed */
+    --message-warn-bg-color: var(--color-level-warning);
+    --message-success-bg-color: var(--color-level-success);
+    --message-info-bg-color: var(--color-border-dark-secondary);
+    --message-danger-bg-color: var(--color-level-error);
+    --note-cat-bg-color: var(--color-bg-btn-minor-inactive);
+    --config-menu-cal-settings-bg-color: var(--color-bg-option);
+    --config-menu-cal-selector-bg-color: var(--color-bg-option);
+    --config-menu-cal-selector-hover-bg-color: var(--color-bg-option-hover);
+    --btn-grey-bg-color: var(--color-bg-btn-minor-inactive);
+    --btn-primary-bg-color: var(--Primary-color);
+    --btn-delete-bg-color: var(--color-level-error);
+    --btn-save-bg-color: var(--color-level-success);
+    --form-group-bg-color: var(--color-bg-option);
+    --cal-day-selected-bg-color: var(--Primary-color);
+    --cal-note-indicator-bg-color: var(--Primary-color);
+    --multi-select-option-bg-color: var(--color-bg-option);
+    --note-sheet-page-list-page-hover-bg-color: var(--Primary-color);
+
+    /* Input and Button Borders */
+    --input-border-color: var(--color-border-light-1);
+    --entity-link-border-color: var(--color-border-dark-2);
+    --section-border-color: var(--color-border-light-2);
+    --side-drawer-border-color: var(--color-border-dark-1);
+    --scrollbar-border-color: var(--color-border-dark-3);
+    --cal-day-border-color: var(--color-border-dark-3);
+    --context-menu-border-color: var(--Primary-color);
+    --config-menu-item-border-color: var(--color-border-light-1);
+    --btn-border: 1px solid var(--Primary-color);
+    --btn-grey-border-color: var(--color-border-light-1);
+    --btn-primary-border-color: var(--Primary-color);
+    --btn-delete-border-color: var(--color-level-error);
+    --btn-save-border-color: var(--color-level-success);
+    --form-group-border-color: var(--color-border-light-1);
+    --note-list-note-border-color: var(--color-border-light-1);
+    --note-sheet-page-list-border-color: var(--Primary-color);
+    
+    /* Additional Styles */
+    --scrollbar-track-bg-color: transparent;
+    --scrollbar-button-bg-color: unset;
+    --scrollbar-button-border: unset;
+    --cal-weekend-bg-color: rgba(0, 0, 0, 0.25);
+    --cal-day-hover-color: var(--color-bg-option-hover);
+    --cal-day-current-bg-color: var(--Primary-color);
+    --cal-day-selected-hover-bg-color: var(--color-bg-btn-minor-active);
+    --cal-note-reminder-indicator-bg-color: var(--color-level-info);
+    --cal-moon-group-bg-color: var(--color-bg-option);
+    --cal-moon-group-border-color: var(--color-border-dark-2);
+    --multi-select-disabled-bg-color: var(--color-bg-option);
+    --toggle-checked-bg-color: var(--Primary-color);
+    
+    /* Hover and Active States */
+    --link-hover-color: var(--color-border-highlight-alt);
+    --entity-link-icon-hover-color: var(--color-border-highlight-alt);
+    --btn-grey-bg-hover-color: var(--color-bg-btn-minor-active);
+    --btn-primary-bg-hover-color: var(--color-border-highlight-alt);
+    --btn-delete-bg-hover-color: var(--color-level-error-highlight);
+    --btn-save-bg-hover-color: var(--color-level-success-highlight);
+    --config-menu-cal-selector-hover-bg-color: var(--color-bg-option-hover);
+}

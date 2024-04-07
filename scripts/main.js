@@ -27,24 +27,46 @@ Hooks.once("init", function() {
         custom: "Custom"
     };
 
+    // Define override CSS filenames
+    const overrideCssFiles = [
+        'simpleCalendar.css'
+    ]; 
+
     function loadMainCSS() {
         const head = document.getElementsByTagName('head')[0];
-        // Ensure existing theme mode style is fully removed
-        let existingLink = document.getElementById('custom-themes-main-css');
-        while (existingLink) {
+        const baseCssId = "custom-themes-main-css";
+        const overrideCssClass = "custom-themes-override-css"; // Class to identify override CSS files
+        const cssFolderRelativePath = "modules/custom-themes/styles/";
+
+        // Remove existing base theme style
+        let existingLink = document.getElementById(baseCssId);
+        if (existingLink) {
             head.removeChild(existingLink);
-            existingLink = document.getElementById('custom-themes-main-css'); // Check again in case of duplicates
         }
+    
+        // Load the main CSS file
         let link = document.createElement('link');
-        link.id = "custom-themes-main-css";
+        link.id = baseCssId;
         link.rel = "stylesheet";
         link.type = "text/css";
-        link.href = "modules/custom-themes/styles/base.css"; // Update the path as necessary
+        link.href = `${cssFolderRelativePath}base.css`; // Path to the main CSS file
         link.media = 'all';
         head.appendChild(link);
-    }
     
-
+        // Remove existing override CSS files
+        document.querySelectorAll(`.${overrideCssClass}`).forEach(el => el.remove());
+    
+        // Load override CSS files
+        overrideCssFiles.forEach((cssFile) => {
+            let overrideLink = document.createElement('link');
+            overrideLink.classList.add(overrideCssClass);
+            overrideLink.rel = "stylesheet";
+            overrideLink.type = "text/css";
+            overrideLink.href = `${cssFolderRelativePath}templates/${cssFile}`; // Path to each override CSS file
+            overrideLink.media = 'all';
+            head.appendChild(overrideLink);
+        });
+    }
 
     function saveGmThemeSettings() {
         const settingsToSave = {
@@ -210,7 +232,6 @@ Hooks.once("init", function() {
     
     }
 
-
     // Register the Theme mode selection setting
     game.settings.register("custom-themes", "themeMode", {
         name: "Theme Mode",
@@ -286,8 +307,6 @@ Hooks.once("init", function() {
         }
     });
 
-
-
     game.settings.register("custom-themes", "colorPalette", {
         name: "Color Palette",
         hint: "Select a color palette preset.",
@@ -300,7 +319,6 @@ Hooks.once("init", function() {
             applyThemeColors(paletteKey);
         }
     });
-
 
     // Register custom color settings using ColorSetting
     ['Primary', 'Secondary', 'Tertiary'].forEach(color => {
@@ -356,9 +374,6 @@ Hooks.once("init", function() {
             head.appendChild(paletteLink);
         }
     }
-
-
-
 
     // Register UI Filter
     game.settings.register("custom-themes", "filterSelection", {
@@ -419,8 +434,6 @@ Hooks.once("init", function() {
         head.appendChild(link);
     }    
 
-
-
     //Register CustomCSS 
     game.settings.register("custom-themes", "customCSS", {
         name: "Custom CSS",
@@ -470,7 +483,6 @@ Hooks.once("init", function() {
 
         }
     });
-    
 
     // Register a "dummy" setting that acts as a button
     game.settings.register("custom-themes", "themeSettingsEnabled", {
@@ -502,11 +514,6 @@ Hooks.once("init", function() {
         default: "{}", // Default to an empty JSON object
     });
  
-
-
-
-
-
     Hooks.once("ready", function() {
         if (game.settings.get("custom-themes", "themeSettingsEnabled")) {
             enableThemeSettings(true);
@@ -515,6 +522,7 @@ Hooks.once("init", function() {
         saveGmThemeSettings();
         applyGmThemeSettingsToAll();
     });
+
     Hooks.on("renderSettingsConfig", (app, html, data) => {
         // Check if the theme is locked and the current user is not the GM
         const themeLock = game.settings.get("custom-themes", "themeLock");
@@ -531,10 +539,3 @@ Hooks.once("init", function() {
     });
     
 });
-
-
-
-
-
-
-    
