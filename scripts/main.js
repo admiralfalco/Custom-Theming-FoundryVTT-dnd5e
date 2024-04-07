@@ -1,21 +1,6 @@
 Hooks.once("init", function() {
-    console.log("Initializing custom theme selector...");
 
-    // Define the color palettes
-    const colorPalettes = {
-        red: { primary: "#c00404", secondary: "#bd6a6a", tertiary: "#f5dbdb" },
-        orange: { primary: "#ff5722", secondary: "#ff8a65", tertiary: "#ffccbc" },
-        blue: { primary: "#007bff", secondary: "#69abf2", tertiary: "#bfdfff" },
-        green: { primary: "#28a745", secondary: "#7ed396", tertiary: "#c3e6cb" },
-        purple: { primary: "#6f42c1", secondary: "#a885d8", tertiary: "#dcbfdf" },
-        yellow: { primary: "#ffc107", secondary: "#ffe083", tertiary: "#fff3cd" },
-        teal: { primary: "#20c997", secondary: "#73d2cc", tertiary: "#b2f2e6" },
-        pink: { primary: "#e83e8c", secondary: "#f496b1", tertiary: "#f8c6d9" },
-        indigo: { primary: "#6610f2", secondary: "#9b7ede", tertiary: "#d1c4f6" },
-        cyan: { primary: "#17a2b8", secondary: "#69c8d4", tertiary: "#bfedf2" },
-        gray: { primary: "#6c757d", secondary: "#a5a5a5", tertiary: "#d6d6d6" },
-        dark: { primary: "#343a40", secondary: "#5a6268", tertiary: "#8a9298" }
-    };
+    console.log("Initializing custom theme selector...");
 
     // Define available filters
     const filters = {
@@ -25,7 +10,208 @@ Hooks.once("init", function() {
         // Add more filters as needed
     };
 
-    // Register the mode selection setting
+    // Define available colors
+    const colors = {
+        red: "Red",
+        orange: "Orange",
+        blue: "Blue",
+        green: "Green",
+        purple: "Purple",
+        yellow: "Yellow",
+        teal: "Teal",
+        pink: "Pink",
+        indigo: "Indigo",
+        cyan: "Cyan",
+        gray: "Gray",
+        dark: "Dark",
+        custom: "Custom"
+    };
+
+    function loadMainCSS() {
+        const head = document.getElementsByTagName('head')[0];
+        // Ensure existing theme mode style is fully removed
+        let existingLink = document.getElementById('custom-themes-main-css');
+        while (existingLink) {
+            head.removeChild(existingLink);
+            existingLink = document.getElementById('custom-themes-main-css'); // Check again in case of duplicates
+        }
+        let link = document.createElement('link');
+        link.id = "custom-themes-main-css";
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = "modules/custom-themes/styles/base.css"; // Update the path as necessary
+        link.media = 'all';
+        head.appendChild(link);
+    }
+    
+
+
+    function saveGmThemeSettings() {
+        const settingsToSave = {
+            themeMode: game.settings.get("custom-themes", "themeMode"),
+            colorPalette: game.settings.get("custom-themes", "colorPalette"),
+            enableCustomBackground: game.settings.get("custom-themes", "enableCustomBackground"),
+            customPrimary: game.settings.get("custom-themes", "customPrimary"),
+            customSecondary: game.settings.get("custom-themes", "customSecondary"),
+            customTertiary: game.settings.get("custom-themes", "customTertiary"),
+            customBackgroundColor: game.settings.get("custom-themes", "customBackgroundColor"),
+            filterSelection: game.settings.get("custom-themes", "filterSelection"),
+            customCSS: game.settings.get("custom-themes", "customCSS"),
+            // Add any other settings you need to save here
+        };
+        
+        const serializedSettings = JSON.stringify(settingsToSave);
+        game.settings.set("custom-themes", "gmThemeSettings", serializedSettings);
+        ui.notifications.info(serializedSettings);
+    }
+
+    function applyGmThemeSettingsToAll() {
+        if (game.settings.get("custom-themes", "themeLock")) {
+            const serializedSettings = game.settings.get("custom-themes", "gmThemeSettings");
+            if (!serializedSettings) {
+                console.warn("GM theme settings not found.");
+                return;
+            }
+    
+            const themeSettings = JSON.parse(serializedSettings);
+    
+            // Apply the theme mode
+            if(!game.user.isGM) {
+                if (themeSettings.themeMode) {
+                    loadThemeMode(themeSettings.themeMode);
+                }
+        
+                // Apply the color palette
+                if (themeSettings.colorPalette) {
+                    applyThemeColors(themeSettings.colorPalette);
+                }
+        
+                // Apply custom background color
+                if (themeSettings.enableCustomBackground && themeSettings.customBackgroundColor) {
+                    document.documentElement.style.setProperty('--background-color', themeSettings.customBackgroundColor);
+                } else {
+                    document.documentElement.style.removeProperty('--background-color');
+                }
+        
+                // Apply custom primary, secondary, tertiary colors
+                ['Primary', 'Secondary', 'Tertiary'].forEach(color => {
+                    const customColor = themeSettings[`custom${color}`];
+                    if (customColor) {
+                        document.documentElement.style.setProperty(`--custom-${color.toLowerCase()}-color`, customColor);
+                    }
+                });
+        
+                // Apply UI filter
+                if (themeSettings.filterSelection) {
+                    loadFilter(themeSettings.filterSelection);
+                }
+        
+                // Apply custom CSS
+                if (themeSettings.customCSS) {
+                    applyCustomCSS(themeSettings.customCSS);
+                }
+            }
+            // Notify users
+    
+            // Note: If there are any additional settings or complex structures, 
+            // you might need to expand this function further to handle those cases.
+        }
+    }``
+
+    function disableAllThemeSettings() {
+        if (game.user.isGM) {
+            // Example actions to "unload" custom themes:
+            
+            // 1. Remove custom stylesheet links (if you add them dynamically)
+            removeCustomStylesheets();
+    
+            // 2. Reset custom CSS properties to default or empty values
+            document.documentElement.style.removeProperty('--Primary-color');
+            document.documentElement.style.removeProperty('--secondary-color');
+            document.documentElement.style.removeProperty('--tertiary-color');
+            document.documentElement.style.removeProperty('--background-color');
+            
+            // 3. Clear any dynamically added <style> or <link> elements specific to your theme
+            const customStyleElement = document.getElementById('theme-mode-style');
+            if (customStyleElement) {
+                customStyleElement.remove();
+            }
+    
+            // 4. Optionally, reset specific settings to "none" or equivalent defaults
+            // This is only necessary if you must store a value in the setting for it to be considered "default"
+            const settingsToReset = {
+                themeMode: "none", // Assuming "none" is a valid value indicating no theme
+                enableCustomBackground: false, // Disabling custom background
+                // Add other settings if needed
+            };
+    
+            // Apply the resets
+            for (const [setting, resetValue] of Object.entries(settingsToReset)) {
+                game.settings.set("custom-themes", setting, resetValue);
+            }
+    
+            // Notify GM of the change
+        } else {
+        }
+    }
+    
+    function removeCustomStylesheets() {
+        const themeModeStylesheet = document.getElementById('theme-mode-style');
+        if (themeModeStylesheet) themeModeStylesheet.remove();
+    
+        const filterStylesheet = document.getElementById('ui-filter-style');
+        if (filterStylesheet) filterStylesheet.remove();
+    
+        const mainStylesheet = document.getElementById('custom-themes-main-css');
+        if (mainStylesheet) mainStylesheet.remove();
+    
+        // Continue this pattern for any other dynamically added stylesheets
+    }
+
+    function enableThemeSettings(loadMainCss = false) {
+        // Optionally re-add the main.css if specified
+        if (loadMainCss) {
+            loadMainCSS(); // This function adds 'custom-themes-main-css' back
+        }
+
+        // Check and apply the theme mode setting
+        const themeMode = game.settings.get("custom-themes", "themeMode");
+        if (themeMode) { // You might want to check for a specific condition
+            loadThemeMode(themeMode);
+        }
+    
+        // Check and apply the color palette
+        const colorPalette = game.settings.get("custom-themes", "colorPalette");
+        if (colorPalette) { // Check if the color palette setting was previously enabled
+            applyThemeColors(colorPalette);
+        }
+    
+        // Reapply custom background if it was enabled
+        const enableCustomBackground = game.settings.get("custom-themes", "enableCustomBackground");
+        if (enableCustomBackground) {
+            const customBackgroundColor = game.settings.get("custom-themes", "customBackgroundColor");
+            // Apply the custom background color
+            document.documentElement.style.setProperty('--background-color', customBackgroundColor);
+        }
+    
+        // Check and reapply the filter selection
+        const filterSelection = game.settings.get("custom-themes", "filterSelection");
+        if (filterSelection) {
+            loadFilter(filterSelection);
+        }
+    
+        // Reapply custom CSS if it was previously added
+        const customCSS = game.settings.get("custom-themes", "customCSS");
+        if (customCSS) {
+            applyCustomCSS(customCSS);
+        }
+    
+        // Additional checks for other settings can be included here
+    
+    }
+
+
+    // Register the Theme mode selection setting
     game.settings.register("custom-themes", "themeMode", {
         name: "Theme Mode",
         hint: "Select between Light and Dark mode.",
@@ -42,6 +228,7 @@ Hooks.once("init", function() {
         }
     });
 
+    //Function For Setting Theme Mode
     function loadThemeMode(selectedMode) {
         const head = document.getElementsByTagName('head')[0];
     
@@ -62,6 +249,7 @@ Hooks.once("init", function() {
         head.appendChild(link);
     }
 
+    //Register the Custom Background color Switch
     game.settings.register("custom-themes", "enableCustomBackground", {
         name: "Enable Custom Background Color",
         hint: "Enable or disable the use of a custom background color.",
@@ -83,42 +271,36 @@ Hooks.once("init", function() {
         }
     });
 
-    // Register the color palette selection setting
+    new window.Ardittristan.ColorSetting("custom-themes", "customBackgroundColor", {
+        name: "Custom Background Color",
+        hint: "Select a custom background color.",
+        label: "Select Color",
+        restricted: false,
+        defaultColor: "#000000", // Default background color, can be set to something else
+        scope: "client",
+        onChange: value => {
+            const enableCustomBackground = game.settings.get("custom-themes", "enableCustomBackground");
+            if (enableCustomBackground) {
+                document.documentElement.style.setProperty('--background-color', value);
+            }
+        }
+    });
+
+
+
     game.settings.register("custom-themes", "colorPalette", {
         name: "Color Palette",
         hint: "Select a color palette preset.",
         scope: "client",
         config: true,
         type: String,
-        choices: {
-            red: "Red",
-            orange: "Orange",
-            blue: "Blue",
-            green: "Green",
-            purple: "Purple",
-            yellow: "Yellow",
-            teal: "Teal",
-            pink: "Pink",
-            indigo: "Indigo",
-            cyan: "Cyan",
-            gray: "Gray",
-            dark: "Dark",
-            custom: "Custom"
-        },
+        choices: colors,
         default: "red",
         onChange: paletteKey => {
-            let palette;
-            if (paletteKey === "custom") {
-                palette = "custom"; // Use a special marker or structure to indicate custom theme
-            } else {
-                palette = colorPalettes[paletteKey];
-            }
-        
-            if (palette) {
-                applyThemeColors(palette);
-            }
+            applyThemeColors(paletteKey);
         }
     });
+
 
     // Register custom color settings using ColorSetting
     ['Primary', 'Secondary', 'Tertiary'].forEach(color => {
@@ -140,42 +322,42 @@ Hooks.once("init", function() {
         });
     });
 
-    new window.Ardittristan.ColorSetting("custom-themes", "customBackgroundColor", {
-        name: "Custom Background Color",
-        hint: "Select a custom background color.",
-        label: "Select Color",
-        restricted: false,
-        defaultColor: "#000000", // Default background color, can be set to something else
-        scope: "client",
-        onChange: value => {
-            const enableCustomBackground = game.settings.get("custom-themes", "enableCustomBackground");
-            if (enableCustomBackground) {
-                document.documentElement.style.setProperty('--background-color', value);
-            }
-        }
-    });
-
-    // Function to apply Theme colors / Custom Colors to CSS variables
-    function applyThemeColors(palette) {
-        let primaryColor = palette.primary,
-            secondaryColor = palette.secondary,
-            tertiaryColor = palette.tertiary;
+    function applyThemeColors(paletteKey) {
+        const head = document.getElementsByTagName('head')[0];
     
-    // If custom theme is selected, fetch and use custom colors
-    if (palette === "custom") {
-        primaryColor = game.settings.get("custom-themes", "customPrimary") || colorPalettes.red.primary;
-        secondaryColor = game.settings.get("custom-themes", "customSecondary") || colorPalettes.red.secondary;
-        tertiaryColor = game.settings.get("custom-themes", "customTertiary") || colorPalettes.red.tertiary;
-    } else {
-        primaryColor = palette.primary;
-        secondaryColor = palette.secondary;
-        tertiaryColor = palette.tertiary;
+        // Ensure the previous palette style is fully removed
+        let existingPaletteLink = document.getElementById('palette-style');
+        if (existingPaletteLink) {
+            head.removeChild(existingPaletteLink);
+        }
+    
+        if (paletteKey === "custom") {
+            // Apply custom colors as before
+            let primaryColor = game.settings.get("custom-themes", "customPrimary") || "#000000";
+            let secondaryColor = game.settings.get("custom-themes", "customSecondary") || "#000000";
+            let tertiaryColor = game.settings.get("custom-themes", "customTertiary") || "#000000";
+    
+            document.documentElement.style.setProperty('--primary-color', primaryColor);
+            document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+            document.documentElement.style.setProperty('--tertiary-color', tertiaryColor);
+        } else {
+            // Remove custom properties before loading a predefined palette
+            document.documentElement.style.removeProperty('--primary-color');
+            document.documentElement.style.removeProperty('--secondary-color');
+            document.documentElement.style.removeProperty('--tertiary-color');
+                
+            // Load the corresponding CSS file for non-custom palettes
+            let paletteLink = document.createElement('link');
+            paletteLink.id = 'palette-style';
+            paletteLink.rel = 'stylesheet';
+            paletteLink.type = 'text/css';
+            paletteLink.href = `modules/custom-themes/styles/colors/${paletteKey}.css`;
+            paletteLink.media = 'all';
+            head.appendChild(paletteLink);
+        }
     }
 
-    document.documentElement.style.setProperty('--Primary-color', primaryColor);
-    document.documentElement.style.setProperty('--secondary-color', secondaryColor);
-    document.documentElement.style.setProperty('--tertiary-color', tertiaryColor);
-    }
+
 
 
     // Register UI Filter
@@ -192,6 +374,7 @@ Hooks.once("init", function() {
         }
     });
 
+    //Function to Activate and Control Filter
     function loadFilter(selectedFilter) {
         const head = document.getElementsByTagName('head')[0];
         let overlay = document.getElementById('ui-filter-overlay');
@@ -227,22 +410,21 @@ Hooks.once("init", function() {
         }
     
         // Apply the selected filter's CSS to the overlay
-        // Option 1: Directly applying styles via CSS files
         let link = document.createElement('link');
         link.id = 'ui-filter-style';
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `modules/custom-themes/styles/Filters/${selectedFilter}.css`;
+        link.href = `modules/custom-themes/styles/filters/${selectedFilter}.css`;
         link.media = 'all';
         head.appendChild(link);
-    
-        // Option 2: Apply a CSS class to the overlay for styling (if your CSS is designed this way)
-        // overlay.className = `filter-${selectedFilter}`; // Make sure these classes are defined in your CSS
-    }
+    }    
 
+
+
+    //Register CustomCSS 
     game.settings.register("custom-themes", "customCSS", {
         name: "Custom CSS",
-        hint: "Enter your custom CSS here. It will be applied on top of the current theme.",
+        hint: "Enter your custom CSS here. It will be applied on top of the current theme. (Hint: Use Developer Console and a CSS Syntax Highlighter)",
         scope: "client",
         config: true,
         type: String,
@@ -250,6 +432,7 @@ Hooks.once("init", function() {
         onChange: value => applyCustomCSS(value) // Apply the CSS when it changes
     });
 
+    //Apply CustomCSS
     function applyCustomCSS(css) {
         let styleId = "user-custom-css";
         let styleElement = document.getElementById(styleId);
@@ -263,33 +446,95 @@ Hooks.once("init", function() {
     
         // Set the custom CSS
         styleElement.innerHTML = css;
-    }
-    
+    }    
 
-    Hooks.once("ready", function() {
-        const selectedPaletteKey = game.settings.get("custom-themes", "colorPalette");
-        // Apply Theme Colors
-        let palette = colorPalettes[selectedPaletteKey];
-        if (selectedPaletteKey === "custom") {
-            palette = "custom";
-        }
-    
-        applyThemeColors(palette || colorPalettes["red"]); // Fallback to red or another default
-        // Apply Theme Mode
-        const themeMode = game.settings.get("custom-themes", "themeMode");
-        loadThemeMode(themeMode);
+    //Register GM Theme Lock
+    game.settings.register("custom-themes", "themeLock", {
+        name: "Theme Lock",
+        hint: "Locks the theme settings for all non-GM users.",
+        scope: "world", // This makes it a game-wide setting, not per-user.
+        config: true, // Shows this in the settings menu.
+        type: Boolean,
+        default: false,
+        restricted: true, // Only the GM can change this.
+        onChange: value => {
+            if (value) {
+                // Save the current theme settings chosen by the GM
+                saveGmThemeSettings();
+                applyGmThemeSettingsToAll();
+            }
+            else {
+                saveGmThemeSettings();
+                enableThemeSettings();
+            }
 
-        // Apply the selected filter
-        const selectedFilter = game.settings.get("custom-themes", "filterSelection");
-        loadFilter(selectedFilter);
-
-        const customCSS = game.settings.get("custom-themes", "customCSS");
-        applyCustomCSS(customCSS);
-
-        const enableCustomBackground = game.settings.get("custom-themes", "enableCustomBackground");
-        if (enableCustomBackground) {
-            const customBackgroundColor = game.settings.get("custom-themes", "customBackgroundColor");
-            document.documentElement.style.setProperty('--background-color', customBackgroundColor);
         }
     });
+    
+
+    // Register a "dummy" setting that acts as a button
+    game.settings.register("custom-themes", "themeSettingsEnabled", {
+        name: "Toggle Theme Settings",
+        hint: "Enable or disable all theme settings. This action is immediate.",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: true, // Assume enabled by default
+        onChange: value => {
+            if (game.user.isGM) {
+                if (value) {
+                    enableThemeSettings(true);
+                } else {
+                    disableAllThemeSettings();
+                }
+                // The setting itself remains as the indicator of the current state
+            }
+        }
+    });
+
+    // Other settings registration
+    game.settings.register("custom-themes", "gmThemeSettings", {
+        name: "GM Theme Settings",
+        hint: "Serialized theme settings for GM control.",
+        scope: "world",
+        config: false, // This likely doesn't need to be visible to the user
+        type: String,
+        default: "{}", // Default to an empty JSON object
+    });
+ 
+
+
+
+
+
+    Hooks.once("ready", function() {
+        if (game.settings.get("custom-themes", "themeSettingsEnabled")) {
+            enableThemeSettings(true);
+        };
+    
+        saveGmThemeSettings();
+        applyGmThemeSettingsToAll();
+    });
+    Hooks.on("renderSettingsConfig", (app, html, data) => {
+        // Check if the theme is locked and the current user is not the GM
+        const themeLock = game.settings.get("custom-themes", "themeLock");
+        if (themeLock && !game.user.isGM) {
+            // Disable all theme-related settings inputs for non-GM users
+            const settingsToDisable = ["themeMode", "enableCustomBackground", "colorPalette", "customPrimary", "customSecondary", "customTertiary", "customBackgroundColor", "filterSelection", "customCSS"]; // Add all the setting names you want to disable
+            settingsToDisable.forEach(settingName => {
+                const settingElement = html.find(`[name="custom-themes.${settingName}"]`);
+                if (settingElement) {
+                    settingElement.prop('disabled', true);
+                }
+            });
+        }
+    });
+    
 });
+
+
+
+
+
+
+    

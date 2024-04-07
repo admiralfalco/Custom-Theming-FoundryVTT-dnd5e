@@ -1,8 +1,8 @@
 :root {
-  --Primary-color: #FFF;
-  --secondary-color: #666;
-  --tertiary-color: #333;
-  --background-color: #000;
+  --Primary-color: none;
+  --secondary-color: none;
+  --tertiary-color: none;
+  --background-color: none;
 }
 
 /* Custom Features */
